@@ -17,14 +17,14 @@ from contextlib import contextmanager
 LOCALE_LOCK = threading.Lock()
 
 ui_locale = '' # e.g. 'fr_FR' fro French, '' as default
-time_format = 12 # 12 or 24
+time_format = 24 # 12 or 24
 date_format = "%b %d, %Y" # check python doc for strftime() for options
-news_country_code = 'us'
-weather_api_token = '<TOKEN>' # create account at https://darksky.net/dev/
-weather_lang = 'en' # see https://darksky.net/dev/docs/forecast for full list of language parameters values
-weather_unit = 'us' # see https://darksky.net/dev/docs/forecast for full list of unit parameters values
-latitude = None # Set this if IP location lookup does not work for you (must be a string)
-longitude = None # Set this if IP location lookup does not work for you (must be a string)
+news_country_code = 'no'
+weather_api_token = '230f9936ea7cbf7f9d4d857a5ababc1e' # create account at https://darksky.net/dev/
+weather_lang = 'no' # see https://darksky.net/dev/docs/forecast for full list of language parameters values
+weather_unit = 'si' # see https://darksky.net/dev/docs/forecast for full list of unit parameters values
+latitude = '59.8939021' # Set this if IP location lookup does not work for you (must be a string)
+longitude = '10.5049463' # Set this if IP location lookup does not work for you (must be a string)
 xlarge_text_size = 94
 large_text_size = 48
 medium_text_size = 28
@@ -225,7 +225,9 @@ class News(Frame):
             for widget in self.headlinesContainer.winfo_children():
                 widget.destroy()
             if news_country_code == None:
-                headlines_url = "https://news.google.com/news?ned=us&output=rss"
+                headlines_url = "https://news.google.com/news?ned=%s&output=rss"
+            elif news_country_code == 'no':
+                headlines_url = "https://www.nrk.no/nyheter/siste.rss"
             else:
                 headlines_url = "https://news.google.com/news?ned=%s&output=rss" % news_country_code
 
